@@ -28,6 +28,8 @@ class MainActivity : BaseActivity() {
         toolbar.title = ""
         setSupportActionBar(toolbar)
 
+        mainLayout.startAnimationBackground()
+
         api.init(applicationContext)
 
         val fragmentList = mutableListOf<Fragment>()
