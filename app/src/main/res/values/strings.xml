@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BitsoPriceChecker</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="refresh">Refresh</string>
+    <string name="template_format_money">$%s</string>
+    <string name="mxn_btc">MXN/BTC</string>
+    <string name="high_indicator">high indicator</string>
+    <string name="low_indicator">low indicator</string>
+    <string name="bid">Bid</string>
+    <string name="ask">Ask</string>
+    <string name="mxn_eth">MXN/ETH</string>
+</resources>

@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.chilangolabs.bitsopricechecker.fragments.ETHTickerFragment">
+
+    <com.gorrotowi.simplerobototextview.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/mxn_eth"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:font="medium" />
+
+    <com.gorrotowi.simplerobototextview.RobotoTextView
+        android:id="@+id/txtEthLast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="44sp"
+        app:font="bold"
+        tools:text="$1,900" />
+
+    <include
+        android:id="@+id/containerETHLowHigh"
+        layout="@layout/content_low_and_high" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/containerEthAskBid"
+            layout="@layout/container_ask_bid" />
+
+    </LinearLayout>
+
+</LinearLayout>
