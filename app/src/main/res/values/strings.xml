@@ -11,4 +11,5 @@
     <string name="bid">Bid</string>
     <string name="ask">Ask</string>
     <string name="mxn_eth">MXN/ETH</string>
+    <string name="template_format_date">%1$s/%2$s/%3$s</string>
 </resources>

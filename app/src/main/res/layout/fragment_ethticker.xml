@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.chilangolabs.bitsopricechecker.fragments.ETHTickerFragment">
 
     <com.gorrotowi.simplerobototextview.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/mxn_eth"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -37,6 +38,10 @@
         <include
             android:id="@+id/containerEthAskBid"
             layout="@layout/container_ask_bid" />
+
+        <include
+            android:id="@+id/containerETHChart"
+            layout="@layout/container_chart" />
 
     </LinearLayout>
 

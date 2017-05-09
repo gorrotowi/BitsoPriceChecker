@@ -44,6 +44,7 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         getTicker()
+        getChartsInfo()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -53,7 +54,10 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.action_refresh -> getTicker()
+            R.id.action_refresh -> {
+                getTicker()
+                getChartsInfo()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -84,6 +88,27 @@ class MainActivity : BaseActivity() {
                 progressDialog.dismiss()
         })
 
+    }
+
+    private fun getChartsInfo() {
+        getChartBTCInfo()
+        getChartETHInfo()
+    }
+
+    private fun getChartETHInfo() {
+        api.getChartInfo(api.SYMBOL_BTC, success = {
+            btcFragment.updateChart(it)
+        }, fail = {
+            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun getChartBTCInfo() {
+        api.getChartInfo(api.SYMBOL_ETH, success = {
+            ethFragment.updateChart(it)
+        }, fail = {
+            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+        })
     }
 
 }

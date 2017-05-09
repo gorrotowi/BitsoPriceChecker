@@ -39,6 +39,10 @@
             android:id="@+id/containerBtcAskBid"
             layout="@layout/container_ask_bid" />
 
+        <include
+            android:id="@+id/containerBTCChart"
+            layout="@layout/container_chart" />
+
     </LinearLayout>
 
 </LinearLayout>

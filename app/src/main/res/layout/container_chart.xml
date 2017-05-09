@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_btcticker">
+
+    <com.gorrotowi.simplerobototextview.RobotoTextView
+        android:id="@+id/txtChartInfoSpark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        tools:text="$432.23" />
+
+    <com.gorrotowi.simplerobototextview.RobotoTextView
+        android:id="@+id/txtChartDateSpark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp" />
+
+    <com.chilangolabs.bitsopricechecker.views.CustomSparkView
+        android:id="@+id/sparkChart"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        app:spark_animateChanges="true"
+        app:spark_lineColor="@android:color/white"
+        app:spark_scrubEnabled="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.gorrotowi.simplerobototextview.RobotoTextView
+            android:id="@+id/txtOldDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="start"
+            app:font="light"
+            tools:text="24 jun 17" />
+
+        <com.gorrotowi.simplerobototextview.RobotoTextView
+            android:id="@+id/txtMiddleDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            app:font="light"
+            tools:text="24 jun 17" />
+
+        <com.gorrotowi.simplerobototextview.RobotoTextView
+            android:id="@+id/txtLastDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="end"
+            app:font="light"
+            tools:text="24 jun 17" />
+
+    </LinearLayout>
+
+</LinearLayout>

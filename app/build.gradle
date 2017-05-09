@@ -31,6 +31,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.gorrotowi.simplerobototextview:simplerobototextview:0.8'
     compile 'com.afollestad.material-dialogs:core:0.9.4.4'
+    compile 'com.robinhood.spark:spark:1.1.2'
     compile 'com.github.vivchar:ViewPagerIndicator:v1.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
