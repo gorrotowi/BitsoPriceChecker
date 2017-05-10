@@ -11,6 +11,7 @@ import com.chilangolabs.bitsopricechecker.adapters.ViewPagerAdapter
 import com.chilangolabs.bitsopricechecker.fragments.BTCTickerFragment
 import com.chilangolabs.bitsopricechecker.fragments.ETHTickerFragment
 import com.chilangolabs.bitsopricechecker.network.Api
+import com.chilangolabs.bitsopricechecker.utils.PriceSPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity() {
         mainLayout.startAnimationBackground()
 
         api.init(applicationContext)
+        PriceSPreferences().init(applicationContext)
 
         val fragmentList = mutableListOf<Fragment>()
         fragmentList.add(btcFragment)
@@ -67,6 +69,7 @@ class MainActivity : BaseActivity() {
                 .progress(true, 0)
                 .content("Update Data")
                 .theme(Theme.LIGHT)
+                .cancelable(false)
                 .build()
         if (useProgress)
             progressDialog.show()

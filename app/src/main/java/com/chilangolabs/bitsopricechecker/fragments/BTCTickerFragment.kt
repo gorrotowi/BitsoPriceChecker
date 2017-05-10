@@ -11,7 +11,9 @@ import com.chilangolabs.bitsopricechecker.R
 import com.chilangolabs.bitsopricechecker.adapters.SparkChartAdapter
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
 import com.chilangolabs.bitsopricechecker.models.PayloadItem
+import com.chilangolabs.bitsopricechecker.utils.PriceSPreferences
 import com.chilangolabs.bitsopricechecker.utils.getDateF
+import com.chilangolabs.bitsopricechecker.utils.getDateFCheck
 import kotlinx.android.synthetic.main.container_ask_bid.view.*
 import kotlinx.android.synthetic.main.container_chart.view.*
 import kotlinx.android.synthetic.main.content_low_and_high.view.*
@@ -19,10 +21,20 @@ import kotlinx.android.synthetic.main.fragment_btcticker.*
 
 class BTCTickerFragment : Fragment() {
 
+    val spreferences = PriceSPreferences()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_btcticker, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        txtBTCLast.text = spreferences.getBTCLast()
+        containerBTCLowHigh.txtLow.text = spreferences.getBTCLow()
+        containerBTCLowHigh.txtHigh.text = spreferences.getBTCHigh()
+        containerBtcAskBid.txtBid.text = spreferences.getBTCBid()
+        containerBtcAskBid.txtAsk.text = spreferences.getBTCAsk()
     }
 
     fun updateData(data: PayloadItem) {
@@ -31,6 +43,14 @@ class BTCTickerFragment : Fragment() {
         containerBTCLowHigh.txtHigh.text = getString(R.string.template_format_money, data.high)
         containerBtcAskBid.txtBid.text = getString(R.string.template_format_money, data.bid)
         containerBtcAskBid.txtAsk.text = getString(R.string.template_format_money, data.ask)
+
+        spreferences.saveBTCLast(txtBTCLast.text.toString())
+        spreferences.saveBTCLow(containerBTCLowHigh.txtLow.text.toString())
+        spreferences.saveBTCHigh(containerBTCLowHigh.txtHigh.text.toString())
+        spreferences.saveBTCBid(containerBtcAskBid.txtBid.text.toString())
+        spreferences.saveBTCAsk(containerBtcAskBid.txtAsk.text.toString())
+        spreferences.saveLastDate(data.createdAt?.getDateFCheck().toString())
+
     }
 
     fun updateChart(data: List<ChartResponse>) {
