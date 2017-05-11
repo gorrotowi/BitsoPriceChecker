@@ -30,7 +30,8 @@ class ETHTickerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        txtEthLast.text = spreferences.getBTCLast()
+        txtEthLast.text = spreferences.getETHLast()
+        txtEthLastDate.text = spreferences.getLastDate()
         containerETHLowHigh.txtLow.text = spreferences.getETHLow()
         containerETHLowHigh.txtHigh.text = spreferences.getETHHigh()
         containerEthAskBid.txtBid.text = spreferences.getETHBid()

@@ -31,6 +31,7 @@ class BTCTickerFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         txtBTCLast.text = spreferences.getBTCLast()
+        txtBTCLastDate.text = spreferences.getLastDate()
         containerBTCLowHigh.txtLow.text = spreferences.getBTCLow()
         containerBTCLowHigh.txtHigh.text = spreferences.getBTCHigh()
         containerBtcAskBid.txtBid.text = spreferences.getBTCBid()

@@ -1,7 +1,9 @@
 package com.chilangolabs.bitsopricechecker
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -13,6 +15,7 @@ import com.chilangolabs.bitsopricechecker.fragments.ETHTickerFragment
 import com.chilangolabs.bitsopricechecker.network.Api
 import com.chilangolabs.bitsopricechecker.utils.PriceSPreferences
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : BaseActivity() {
 
@@ -20,6 +23,8 @@ class MainActivity : BaseActivity() {
 
     val btcFragment = BTCTickerFragment()
     val ethFragment = ETHTickerFragment()
+
+    val timer: Timer? = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +46,34 @@ class MainActivity : BaseActivity() {
         viewPager.adapter = ViewPagerAdapter(supportFragmentManager, fragmentList)
         viewPagerIndicator.setupWithViewPager(viewPager)
 
+        val handler: Handler = Handler()
+        val doAsyncTask = object : TimerTask() {
+            override fun run() {
+                Log.e("TASK", "----------->>>>>>>>>>>>>>>>>>>>>>")
+                handler.post {
+                    Runnable {
+                        Log.e("TASK", "------------------------------>>>>>>")
+                        getTicker(useProgress = false)
+                    }.run()
+                }
+            }
+        }
+        timer?.schedule(doAsyncTask, 0, 5000)
+
     }
 
     override fun onResume() {
         super.onResume()
-        getTicker()
+//        getTicker()
         getChartsInfo()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.let {
+            it.cancel()
+            it.purge()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

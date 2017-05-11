@@ -29,7 +29,7 @@ class Api {
 
     fun getLogginInterceptor(): OkHttpClient? {
         val logginInterceptor = HttpLoggingInterceptor()
-        logginInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        logginInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val builder = OkHttpClient.Builder()
         builder.interceptors().add(logginInterceptor)

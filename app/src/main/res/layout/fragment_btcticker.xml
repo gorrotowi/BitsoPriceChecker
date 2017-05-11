@@ -26,6 +26,12 @@
         app:font="bold"
         tools:text="$31,200" />
 
+    <com.gorrotowi.simplerobototextview.RobotoTextView
+        android:id="@+id/txtBTCLastDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="26/09/12 22:10:22" />
+
     <include
         android:id="@+id/containerBTCLowHigh"
         layout="@layout/content_low_and_high" />
