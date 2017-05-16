@@ -23,46 +23,56 @@
         android:gravity="center"
         android:textSize="14sp" />
 
-    <com.chilangolabs.bitsopricechecker.views.CustomSparkView
-        android:id="@+id/sparkChart"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        app:spark_animateChanges="true"
-        app:spark_lineColor="@android:color/white"
-        app:spark_scrubEnabled="true" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <com.chilangolabs.bitsopricechecker.views.CustomSparkView
+            android:id="@+id/sparkChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linearLayout"
+            app:spark_animateChanges="true"
+            app:spark_lineColor="@android:color/white"
+            app:spark_scrubEnabled="true" />
 
-        <com.gorrotowi.simplerobototextview.RobotoTextView
-            android:id="@+id/txtOldDate"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="start"
-            app:font="light"
-            tools:text="24 jun 17" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
 
-        <com.gorrotowi.simplerobototextview.RobotoTextView
-            android:id="@+id/txtMiddleDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            app:font="light"
-            tools:text="24 jun 17" />
+            <com.gorrotowi.simplerobototextview.RobotoTextView
+                android:id="@+id/txtOldDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="start"
+                app:font="light"
+                tools:text="24 jun 17" />
 
-        <com.gorrotowi.simplerobototextview.RobotoTextView
-            android:id="@+id/txtLastDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="end"
-            app:font="light"
-            tools:text="24 jun 17" />
+            <com.gorrotowi.simplerobototextview.RobotoTextView
+                android:id="@+id/txtMiddleDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                app:font="light"
+                tools:text="24 jun 17" />
 
-    </LinearLayout>
+            <com.gorrotowi.simplerobototextview.RobotoTextView
+                android:id="@+id/txtLastDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="end"
+                app:font="light"
+                tools:text="24 jun 17" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -3,7 +3,6 @@ package com.chilangolabs.bitsopricechecker
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -49,10 +48,8 @@ class MainActivity : BaseActivity() {
         val handler: Handler = Handler()
         val doAsyncTask = object : TimerTask() {
             override fun run() {
-                Log.e("TASK", "----------->>>>>>>>>>>>>>>>>>>>>>")
                 handler.post {
                     Runnable {
-                        Log.e("TASK", "------------------------------>>>>>>")
                         getTicker(useProgress = false)
                     }.run()
                 }
@@ -64,7 +61,6 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-//        getTicker()
         getChartsInfo()
     }
 
