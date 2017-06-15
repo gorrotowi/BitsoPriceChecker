@@ -2,55 +2,57 @@ package com.chilangolabs.bitsopricechecker
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.Theme
-import com.chilangolabs.bitsopricechecker.adapters.ViewPagerAdapter
-import com.chilangolabs.bitsopricechecker.fragments.BTCTickerFragment
-import com.chilangolabs.bitsopricechecker.fragments.ETHTickerFragment
+
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import com.chilangolabs.bitsopricechecker.adapters.AdapterRcCoins
+import com.chilangolabs.bitsopricechecker.models.ItemCoin
 import com.chilangolabs.bitsopricechecker.network.Api
-import com.chilangolabs.bitsopricechecker.utils.PriceSPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+
+/**
+ * @author Gorro
+ * @since 07/05/17.
+ */
 
 class MainActivity : BaseActivity() {
 
     val api = Api()
-
-    val btcFragment = BTCTickerFragment()
-    val ethFragment = ETHTickerFragment()
-
     val timer: Timer? = Timer()
+    val dataCoins = arrayListOf<ItemCoin>()
+    val bgCoins = arrayListOf(R.drawable.bg_yellow_round_corners,
+            R.drawable.bg_gray_round_corners,
+            R.drawable.bg_blue_round_corners,
+            R.drawable.bg_pink_round_corners,
+            R.drawable.bg_red_round_corners,
+            R.drawable.bg_yellow_round_corners,
+            R.drawable.bg_gray_round_corners,
+            R.drawable.bg_blue_round_corners)
+    var adapter = AdapterRcCoins(arrayListOf<ItemCoin>())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.setStatusBarHeigh()
-        toolbar.title = ""
+//        toolbar.setStatusBarHeigh()
+        toolbar.title = "Bitso® Ticker"
         setSupportActionBar(toolbar)
 
-        mainLayout.startAnimationBackground()
-
         api.init(applicationContext)
-        PriceSPreferences().init(applicationContext)
 
-        val fragmentList = mutableListOf<Fragment>()
-        fragmentList.add(btcFragment)
-        fragmentList.add(ethFragment)
+        rcCoins.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) as RecyclerView.LayoutManager
+        rcCoins.setHasFixedSize(true)
+        rcCoins.adapter = adapter
 
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager, fragmentList)
-        viewPagerIndicator.setupWithViewPager(viewPager)
-
+        progressBarCoins.visibility = View.VISIBLE
         val handler: Handler = Handler()
         val doAsyncTask = object : TimerTask() {
             override fun run() {
                 handler.post {
                     Runnable {
-                        getTicker(useProgress = false)
+                        getTickerData()
                     }.run()
                 }
             }
@@ -61,7 +63,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        getChartsInfo()
+        getTickerData()
     }
 
     override fun onDestroy() {
@@ -72,69 +74,33 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_refresh -> {
-                getTicker()
-                getChartsInfo()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun getTicker(useProgress: Boolean = true) {
-        val progressDialog = MaterialDialog.Builder(this)
-                .progress(true, 0)
-                .content("Update Data")
-                .theme(Theme.LIGHT)
-                .cancelable(false)
-                .build()
-        if (useProgress)
-            progressDialog.show()
-
+    private fun getTickerData() {
         api.getTicker(success = {
-            if (useProgress)
-                progressDialog.dismiss()
-            val btcData = it.payload?.get(0)
-            val ethData = it.payload?.get(1)
-
-            if (btcData != null && ethData != null) {
-                btcFragment.updateData(btcData)
-                ethFragment.updateData(ethData)
-            } else
-                Toast.makeText(this, "Tuvimos problemas al recuperar algunos datos, intenta nuevamente mas tarde", Toast.LENGTH_SHORT).show()
-
+            progressBarCoins.visibility = View.GONE
+            it.payload?.let {
+                dataCoins.clear()
+                it.mapIndexed { index, payloadItem ->
+                    val splitBook = payloadItem?.book?.split("_")
+                    dataCoins.add(
+                            ItemCoin(splitBook?.get(0)?.toUpperCase(),
+                                    payloadItem?.last,
+                                    splitBook?.get(1)?.toUpperCase(),
+                                    payloadItem?.low,
+                                    payloadItem?.high,
+                                    bgCoins[index]
+                            ))
+                }
+                adapter.updateCoinListItems(dataCoins)
+            }
         }, fail = {
-            if (useProgress)
-                progressDialog.dismiss()
-        })
-
-    }
-
-    private fun getChartsInfo() {
-        getChartBTCInfo()
-        getChartETHInfo()
-    }
-
-    private fun getChartETHInfo() {
-        api.getChartInfo(api.SYMBOL_BTC, success = {
-            btcFragment.updateChart(it)
-        }, fail = {
-            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            progressBarCoins.visibility = View.GONE
+            if (dataCoins.size <= 0) {
+                txtErrorNoData.visibility = View.GONE
+            } else {
+                txtErrorNoData.visibility = View.VISIBLE
+            }
         })
     }
 
-    private fun getChartBTCInfo() {
-        api.getChartInfo(api.SYMBOL_ETH, success = {
-            ethFragment.updateChart(it)
-        }, fail = {
-            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
-        })
-    }
 
 }

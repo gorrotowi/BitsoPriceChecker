@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 
 /**
- * Created by Gorro on 07/05/17.
+ * @author Gorro
+ * @since 07/05/17.
  */
 
 open class BaseActivity : AppCompatActivity() {

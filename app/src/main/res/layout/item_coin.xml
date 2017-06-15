@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/cardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_pink_round_corners"
+        android:elevation="2dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:padding="10dp">
+
+            <com.gorrotowi.simplerobototextview.RobotoTextView
+                android:id="@+id/txtItemCryptoName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                android:transitionName="txtTransitionCryptoCoin"
+                app:font="black"
+                tools:text="BTC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <com.gorrotowi.simplerobototextview.RobotoTextView
+                    android:id="@+id/txtItemMin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    app:font="regular"
+                    tools:text="42000" />
+
+                <com.gorrotowi.simplerobototextview.RobotoTextView
+                    android:id="@+id/txtItemMax"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    app:font="medium"
+                    tools:text="42000" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:elevation="3dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-1dp"
+            android:layout_weight="2"
+            app:cardElevation="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.gorrotowi.simplerobototextview.RobotoTextView
+                    android:id="@+id/txtItemCurrency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/txtItemPriceAutoFit"
+                    android:layout_alignStart="@+id/txtItemPriceAutoFit"
+                    android:layout_marginBottom="-10dp"
+                    android:textSize="23sp"
+                    app:font="condensedLight"
+                    tools:text="MXN" />
+
+                <me.grantland.widget.AutofitLayout
+                    android:id="@+id/txtItemPriceAutoFit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <com.gorrotowi.simplerobototextview.RobotoTextView
+                        android:id="@+id/txtItemPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="46sp"
+                        android:transitionName="txtTransitionPrice"
+                        app:font="condensedBold"
+                        app:minTextSize="28sp"
+                        tools:text="46532" />
+
+                </me.grantland.widget.AutofitLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

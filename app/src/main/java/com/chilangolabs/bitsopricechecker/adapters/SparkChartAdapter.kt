@@ -19,4 +19,5 @@ class SparkChartAdapter(private val yData: FloatArray) : SparkAdapter() {
     override fun getY(index: Int): Float {
         return yData[index]
     }
+
 }

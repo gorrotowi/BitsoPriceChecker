@@ -1,6 +1,7 @@
 package com.chilangolabs.bitsopricechecker.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.chilangolabs.bitsopricechecker.R
+import com.chilangolabs.bitsopricechecker.activitys.CoinDetailActivity
 import com.chilangolabs.bitsopricechecker.adapters.SparkChartAdapter
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
 import com.chilangolabs.bitsopricechecker.models.PayloadItem
@@ -30,6 +32,9 @@ class BTCTickerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        txtBTCLast.setOnClickListener {
+            startActivity(Intent(activity, CoinDetailActivity::class.java))
+        }
         txtBTCLast.text = spreferences.getBTCLast()
         txtBTCLastDate.text = spreferences.getLastDate()
         containerBTCLowHigh.txtLow.text = spreferences.getBTCLow()

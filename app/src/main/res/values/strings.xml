@@ -12,4 +12,5 @@
     <string name="ask">Ask</string>
     <string name="mxn_eth">MXN/ETH</string>
     <string name="template_format_date">%1$s/%2$s/%3$s</string>
+    <string name="error_no_data">Something was wrong please don\'t sell your coins :(</string>
 </resources>
