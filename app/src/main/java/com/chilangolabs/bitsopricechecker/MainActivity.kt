@@ -77,6 +77,7 @@ class MainActivity : BaseActivity() {
     private fun getTickerData() {
         api.getTicker(success = {
             progressBarCoins.visibility = View.GONE
+            txtErrorNoData.visibility = View.GONE
             it.payload?.let {
                 dataCoins.clear()
                 it.mapIndexed { index, payloadItem ->
@@ -94,7 +95,7 @@ class MainActivity : BaseActivity() {
             }
         }, fail = {
             progressBarCoins.visibility = View.GONE
-            if (dataCoins.size <= 0) {
+            if (adapter.itemCount <= 0) {
                 txtErrorNoData.visibility = View.GONE
             } else {
                 txtErrorNoData.visibility = View.VISIBLE

@@ -3,6 +3,7 @@ package com.chilangolabs.bitsopricechecker.network
 import android.content.Context
 import android.util.Log
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
+import com.chilangolabs.bitsopricechecker.models.OrdersResponse
 import com.chilangolabs.bitsopricechecker.models.TickerResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -67,7 +68,6 @@ class Api {
     fun init(ctx: Context) {
         endpoints = getClient()?.create(Endpoints::class.java)!!
         endpointsChart = getClientChart()?.create(EndpointsChart::class.java)!!
-
     }
 
     fun getTicker(success: (response: TickerResponse) -> Unit, fail: (error: Throwable) -> Unit) {
@@ -83,6 +83,24 @@ class Api {
             }
 
             override fun onFailure(call: Call<TickerResponse>?, t: Throwable?) {
+                fail(t ?: Throwable("Error, intenta nuevamente"))
+            }
+
+        })
+    }
+
+    fun getBooksOrder(book: String, success: (response: OrdersResponse) -> Unit, fail: (error: Throwable) -> Unit) {
+        val call: Call<OrdersResponse> = endpoints.getBookOrder(book)
+        call.enqueue(object : Callback<OrdersResponse> {
+            override fun onResponse(call: Call<OrdersResponse>?, response: Response<OrdersResponse>?) {
+                if (response?.code() == 200) {
+                    success(response.body())
+                } else {
+                    fail(Throwable("Intenta nuevamente"))
+                }
+            }
+
+            override fun onFailure(call: Call<OrdersResponse>?, t: Throwable?) {
                 fail(t ?: Throwable("Error, intenta nuevamente"))
             }
 

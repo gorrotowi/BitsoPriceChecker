@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorCoin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,7 @@
         android:id="@+id/appBarCoin"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:background="@android:color/transparent"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -20,9 +22,11 @@
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <View
+                android:id="@+id/viewBgGradient"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark" />
+                android:layout_height="280dp"
+                android:layout_marginTop="-30dp"
+                android:transitionName="@string/viewbg_transition_name" />
 
             <View
                 android:layout_width="match_parent"
@@ -33,15 +37,30 @@
                 android:layout_height="match_parent">
 
                 <com.gorrotowi.simplerobototextview.RobotoTextView
-                    android:id="@+id/txtCoinCurrency"
+                    android:id="@+id/txtCoinCurrencyCrypto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/txtCoinValue"
                     android:layout_alignStart="@+id/txtCoinValue"
+                    android:layout_marginBottom="-10dp"
                     android:text="BTC"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
-                    app:font="thin" />
+                    android:transitionName="@string/coin_transition_name"
+                    app:font="condensedBold" />
+
+                <com.gorrotowi.simplerobototextview.RobotoTextView
+                    android:id="@+id/txtCoinCurrency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtCoinCurrencyCrypto"
+                    android:layout_alignBottom="@+id/txtCoinCurrencyCrypto"
+                    android:layout_toEndOf="@+id/txtCoinCurrencyCrypto"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:transitionName="@string/currency_transition_name"
+                    app:font="light"
+                    tools:text="MXN" />
 
                 <com.gorrotowi.simplerobototextview.RobotoTextView
                     android:id="@+id/txtCoinValue"
@@ -49,34 +68,43 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:paddingBottom="15dp"
-                    android:text="$42000"
+                    android:paddingBottom="25dp"
+                    android:text="42000"
                     android:textColor="@android:color/white"
                     android:textSize="52sp"
-                    app:font="condensedRegular" />
+                    android:transitionName="@string/price_transition_name"
+                    app:font="condensedBold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="65dp"
+                    android:layout_marginBottom="75dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:orientation="horizontal">
 
                     <com.gorrotowi.simplerobototextview.RobotoTextView
+                        android:id="@+id/txtCoinMin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:gravity="center"
                         android:text="$4200"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:font="regular" />
 
                     <com.gorrotowi.simplerobototextview.RobotoTextView
+                        android:id="@+id/txtCoinMax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="$4200"
-                        android:textColor="@android:color/white" />
+                        android:text="$4400"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:font="medium" />
 
                 </LinearLayout>
 

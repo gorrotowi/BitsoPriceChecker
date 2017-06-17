@@ -13,4 +13,13 @@
     <string name="mxn_eth">MXN/ETH</string>
     <string name="template_format_date">%1$s/%2$s/%3$s</string>
     <string name="error_no_data">Something was wrong please don\'t sell your coins :(</string>
+    <string name="coin_transition_name">txtTransitionCryptoCoin</string>
+    <string name="currency_transition_name">txtTransitionCurrency</string>
+    <string name="price_transition_name">txtTransitionPrice</string>
+    <string name="viewbg_transition_name">viewTransitionBg</string>
+    <string name="card_chart_transition_name">cardChartInfoTransitionName</string>
+    <string name="low_price">lowPriceCurrency</string>
+    <string name="max_price">maxPriceCurrency</string>
+    <string name="loading_message">Loading...</string>
+    <string name="reload_chart">Touch to reload the chart</string>
 </resources>
