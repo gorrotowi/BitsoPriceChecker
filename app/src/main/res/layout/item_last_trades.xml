@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <me.grantland.widget.AutofitLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <com.gorrotowi.simplerobototextview.RobotoTextView
+            android:id="@+id/txtItemLastTradePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="3dp"
+            android:singleLine="true"
+            android:textSize="15sp"
+            app:font="medium"
+            app:minTextSize="10sp"
+            tools:text="Price" />
+    </me.grantland.widget.AutofitLayout>
+
+    <me.grantland.widget.AutofitLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <com.gorrotowi.simplerobototextview.RobotoTextView
+            android:id="@+id/txtItemLastTradeAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="3dp"
+            android:singleLine="true"
+            android:textSize="15sp"
+            app:font="medium"
+            app:minTextSize="10sp"
+            tools:text="Amount" />
+
+    </me.grantland.widget.AutofitLayout>
+
+    <me.grantland.widget.AutofitLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.gorrotowi.simplerobototextview.RobotoTextView
+            android:id="@+id/txtItemLastTradeType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="3dp"
+            android:singleLine="true"
+            android:textSize="15sp"
+            app:font="medium"
+            app:minTextSize="10sp"
+            tools:text="Type" />
+
+    </me.grantland.widget.AutofitLayout>
+
+</LinearLayout>
