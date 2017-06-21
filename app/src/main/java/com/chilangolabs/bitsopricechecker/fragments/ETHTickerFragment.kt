@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.chilangolabs.bitsopricechecker.R
 import com.chilangolabs.bitsopricechecker.adapters.SparkChartAdapter
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
-import com.chilangolabs.bitsopricechecker.models.PayloadItem
+import com.chilangolabs.bitsopricechecker.models.TickerResponse
 import com.chilangolabs.bitsopricechecker.utils.PriceSPreferences
 import com.chilangolabs.bitsopricechecker.utils.getDateF
 import com.chilangolabs.bitsopricechecker.utils.getDateFCheck
@@ -38,7 +38,7 @@ class ETHTickerFragment : Fragment() {
         containerEthAskBid.txtAsk.text = spreferences.getETHAsk()
     }
 
-    fun updateData(data: PayloadItem) {
+    fun updateData(data: TickerResponse.PayloadItem) {
         txtEthLast.text = getString(R.string.template_format_money, data.last)
         containerETHLowHigh.txtLow.text = getString(R.string.template_format_money, data.low)
         containerETHLowHigh.txtHigh.text = getString(R.string.template_format_money, data.high)

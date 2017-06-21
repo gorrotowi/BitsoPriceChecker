@@ -40,14 +40,20 @@ class MainActivity : BaseActivity() {
         toolbar.title = "Bitso® Ticker"
         setSupportActionBar(toolbar)
 
-        api.init(applicationContext)
+        api.init()
 
         rcCoins.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) as RecyclerView.LayoutManager
         rcCoins.setHasFixedSize(true)
         rcCoins.adapter = adapter
 
+        swRefreshLayoutCoins.setOnRefreshListener {
+            swRefreshLayoutCoins.isRefreshing = true
+            getTickerData()
+        }
+
         progressBarCoins.visibility = View.VISIBLE
         val handler: Handler = Handler()
+        swRefreshLayoutCoins.isRefreshing = true
         val doAsyncTask = object : TimerTask() {
             override fun run() {
                 handler.post {
@@ -76,6 +82,7 @@ class MainActivity : BaseActivity() {
 
     private fun getTickerData() {
         api.getTicker(success = {
+            swRefreshLayoutCoins.isRefreshing = false
             progressBarCoins.visibility = View.GONE
             txtErrorNoData.visibility = View.GONE
             it.payload?.let {
@@ -88,14 +95,17 @@ class MainActivity : BaseActivity() {
                                     splitBook?.get(1)?.toUpperCase(),
                                     payloadItem?.low,
                                     payloadItem?.high,
+                                    payloadItem?.ask,
+                                    payloadItem?.bid,
                                     bgCoins[index]
                             ))
                 }
                 adapter.updateCoinListItems(dataCoins)
             }
         }, fail = {
+            swRefreshLayoutCoins.isRefreshing = false
             progressBarCoins.visibility = View.GONE
-            if (adapter.itemCount <= 0) {
+            if (adapter.itemCount <= 0 || dataCoins.isEmpty()) {
                 txtErrorNoData.visibility = View.GONE
             } else {
                 txtErrorNoData.visibility = View.VISIBLE

@@ -22,4 +22,6 @@
     <string name="max_price">maxPriceCurrency</string>
     <string name="loading_message">Loading...</string>
     <string name="reload_chart">Touch to reload the chart</string>
+    <string name="ask_price">askprice</string>
+    <string name="bid_price">bidprice</string>
 </resources>

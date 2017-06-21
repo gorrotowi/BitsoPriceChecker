@@ -12,7 +12,7 @@ import com.chilangolabs.bitsopricechecker.R
 import com.chilangolabs.bitsopricechecker.activitys.CoinDetailActivity
 import com.chilangolabs.bitsopricechecker.adapters.SparkChartAdapter
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
-import com.chilangolabs.bitsopricechecker.models.PayloadItem
+import com.chilangolabs.bitsopricechecker.models.TickerResponse
 import com.chilangolabs.bitsopricechecker.utils.PriceSPreferences
 import com.chilangolabs.bitsopricechecker.utils.getDateF
 import com.chilangolabs.bitsopricechecker.utils.getDateFCheck
@@ -43,7 +43,7 @@ class BTCTickerFragment : Fragment() {
         containerBtcAskBid.txtAsk.text = spreferences.getBTCAsk()
     }
 
-    fun updateData(data: PayloadItem) {
+    fun updateData(data: TickerResponse.PayloadItem) {
         txtBTCLast.text = getString(R.string.template_format_money, data.last)
         containerBTCLowHigh.txtLow.text = getString(R.string.template_format_money, data.low)
         containerBTCLowHigh.txtHigh.text = getString(R.string.template_format_money, data.high)

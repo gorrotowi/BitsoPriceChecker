@@ -41,6 +41,8 @@ class AdapterRcCoins(val data: ArrayList<ItemCoin>?) : RecyclerView.Adapter<Adap
                 intent.putExtra(context?.getString(R.string.price_transition_name), data[position].value)
                 intent.putExtra(context?.getString(R.string.low_price), data[position].min)
                 intent.putExtra(context?.getString(R.string.max_price), data[position].max)
+                intent.putExtra(context?.getString(R.string.ask_price), data[position].ask)
+                intent.putExtra(context?.getString(R.string.bid_price), data[position].bid)
                 val p1: Pair<View, String> = Pair.create(holder.itemView?.cardContainer, context?.getString(R.string.viewbg_transition_name))
                 val p2: Pair<View, String> = Pair.create(holder.itemView?.txtItemCryptoName, context?.getString(R.string.coin_transition_name))
                 val p3: Pair<View, String> = Pair.create(holder.itemView?.txtItemCurrency, context?.getString(R.string.currency_transition_name))

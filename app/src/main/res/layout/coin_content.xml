@@ -123,16 +123,17 @@
             android:padding="10dp">
 
             <com.gorrotowi.simplerobototextview.RobotoTextView
+                android:id="@+id/txtCoinLastTradeBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Posturas de Ventas"
+                android:text="Recent Trades"
                 app:font="condensedRegular" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rcLastBids"
+                android:id="@+id/rcLastTrades"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

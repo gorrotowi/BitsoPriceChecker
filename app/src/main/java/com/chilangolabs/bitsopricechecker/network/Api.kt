@@ -3,6 +3,7 @@ package com.chilangolabs.bitsopricechecker.network
 import android.content.Context
 import android.util.Log
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
+import com.chilangolabs.bitsopricechecker.models.LastTradesResponse
 import com.chilangolabs.bitsopricechecker.models.OrdersResponse
 import com.chilangolabs.bitsopricechecker.models.TickerResponse
 import okhttp3.OkHttpClient
@@ -17,9 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by Gorro on 05/05/17.
  */
 class Api {
-
-    val SYMBOL_BTC = "BTCMXN"
-    val SYMBOL_ETH = "ETHMXN"
 
     companion object factory {
         var retrofit: Retrofit? = null
@@ -65,7 +63,7 @@ class Api {
         return retrofitChart
     }
 
-    fun init(ctx: Context) {
+    fun init() {
         endpoints = getClient()?.create(Endpoints::class.java)!!
         endpointsChart = getClientChart()?.create(EndpointsChart::class.java)!!
     }
@@ -101,6 +99,24 @@ class Api {
             }
 
             override fun onFailure(call: Call<OrdersResponse>?, t: Throwable?) {
+                fail(t ?: Throwable("Error, intenta nuevamente"))
+            }
+
+        })
+    }
+
+    fun getLastOrdersBook(book: String, success: (response: LastTradesResponse) -> Unit, fail: (error: Throwable) -> Unit) {
+        val call: Call<LastTradesResponse> = endpoints.getLastTrades(book)
+        call.enqueue(object : Callback<LastTradesResponse> {
+            override fun onResponse(call: Call<LastTradesResponse>?, response: Response<LastTradesResponse>?) {
+                if (response?.code() == 200) {
+                    success(response.body())
+                } else {
+                    fail(Throwable("Intenta nuevamente"))
+                }
+            }
+
+            override fun onFailure(call: Call<LastTradesResponse>?, t: Throwable?) {
                 fail(t ?: Throwable("Error, intenta nuevamente"))
             }
 

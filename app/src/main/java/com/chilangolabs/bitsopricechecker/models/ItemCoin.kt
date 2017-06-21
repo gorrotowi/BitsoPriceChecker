@@ -11,4 +11,6 @@ data class ItemCoin(val coin: String? = "BTC",
                     val currency: String? = "MXN",
                     val min: String? = "40200",
                     val max: String? = "42024",
+                    val ask: String? = "2134",
+                    val bid: String? = "23413",
                     @DrawableRes val bg: Int?)
