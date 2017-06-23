@@ -11,12 +11,13 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarCoin"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="260dp"
         android:background="@android:color/transparent"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarCoin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
@@ -24,13 +25,14 @@
             <View
                 android:id="@+id/viewBgGradient"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="320dp"
                 android:layout_marginTop="-30dp"
                 android:transitionName="@string/viewbg_transition_name" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
 
                 <com.gorrotowi.simplerobototextview.RobotoTextView
                     android:id="@+id/txtCoinCurrencyCrypto"
@@ -110,7 +112,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|snap" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -119,7 +122,6 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
         app:behavior_overlapTop="60dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

@@ -2,12 +2,12 @@ package com.chilangolabs.bitsopricechecker
 
 import android.os.Bundle
 import android.os.Handler
-
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.chilangolabs.bitsopricechecker.adapters.AdapterRcCoins
 import com.chilangolabs.bitsopricechecker.models.ItemCoin
+import com.chilangolabs.bitsopricechecker.models.SingletonResponseCoins
 import com.chilangolabs.bitsopricechecker.network.Api
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -100,6 +100,7 @@ class MainActivity : BaseActivity() {
                                     bgCoins[index]
                             ))
                 }
+                SingletonResponseCoins.coinsChange(dataCoins)
                 adapter.updateCoinListItems(dataCoins)
             }
         }, fail = {

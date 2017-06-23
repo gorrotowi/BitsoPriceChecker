@@ -12,6 +12,7 @@ import com.chilangolabs.bitsopricechecker.adapters.SparkChartAdapter
 import com.chilangolabs.bitsopricechecker.models.ChartResponse
 import com.chilangolabs.bitsopricechecker.models.ItemLastTrades
 import com.chilangolabs.bitsopricechecker.models.LastTradesResponse
+import com.chilangolabs.bitsopricechecker.models.SingletonResponseCoins
 import com.chilangolabs.bitsopricechecker.network.Api
 import com.chilangolabs.bitsopricechecker.utils.getDateF
 import kotlinx.android.synthetic.main.coin_content.*
@@ -20,7 +21,8 @@ import kotlinx.android.synthetic.main.fragment_coin.*
 class CoinDetailActivity : BaseActivity() {
 
     val api = Api()
-    var currency = ""
+    lateinit var currency: String
+    lateinit var coin: String
     lateinit var adapter: AdapterLastTrades
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,13 +33,14 @@ class CoinDetailActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
         val linearly = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rcLastTrades.layoutManager = linearly
         rcLastTrades.setHasFixedSize(true)
 
         intent?.extras?.let {
             val bg = it.getInt(getString(R.string.viewbg_transition_name), R.drawable.bg_pink_round_corners)
-            val coin = it.getString(getString(R.string.coin_transition_name), "BTC")
+            coin = it.getString(getString(R.string.coin_transition_name), "BTC")
             currency = it.getString(getString(R.string.currency_transition_name), "MXN")
             val price = it.getString(getString(R.string.price_transition_name), "4200")
             val ask = it.getString(getString(R.string.ask_price), "4200")
@@ -50,11 +53,25 @@ class CoinDetailActivity : BaseActivity() {
             txtCoinMin.text = "Ask\n$ask"
             txtCoinMax.text = "Bid\n$bid"
 
+            appBarCoin.hideShowTitle(collapsingToolbarCoin, "${coin.toUpperCase()}${currency.toUpperCase()}")
+
             getChartInfo("${coin.toUpperCase()}${currency.toUpperCase()}")
             getLastOrders("${coin.toLowerCase()}_${currency.toLowerCase()}")
-//            getBooksOrders("${coin.toLowerCase()}_${currency.toLowerCase()}")
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SingletonResponseCoins.onCoinsChanged(changed = {
+            it?.filter {
+                it.coin?.toUpperCase().equals(coin.toUpperCase()) && it.currency?.toUpperCase().equals(currency.toUpperCase())
+            }?.map {
+                txtCoinValue.text = it.value
+                txtCoinMin.text = it.ask
+                txtCoinMax.text = it.bid
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

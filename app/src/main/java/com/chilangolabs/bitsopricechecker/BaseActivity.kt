@@ -2,6 +2,8 @@ package com.chilangolabs.bitsopricechecker
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -31,6 +33,23 @@ open class BaseActivity : AppCompatActivity() {
         animationDrawable.setEnterFadeDuration(2500)
         animationDrawable.setExitFadeDuration(5000)
         animationDrawable.start()
+    }
+
+    fun AppBarLayout.hideShowTitle(collapsingToolbar: CollapsingToolbarLayout, title: String) {
+        var isShow = false
+        var scrollRange = -1
+        this.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if (scrollRange == -1) {
+                scrollRange = appBarLayout.totalScrollRange
+            }
+            if (scrollRange + verticalOffset == 0) {
+                collapsingToolbar.title = title
+                isShow = true
+            } else if (isShow) {
+                collapsingToolbar.title = " "
+                isShow = false
+            }
+        }
     }
 
 }
