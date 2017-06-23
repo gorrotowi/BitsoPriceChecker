@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.chilangolabs.bitsopricechecker.adapters.AdapterRcCoins
 import com.chilangolabs.bitsopricechecker.models.ItemCoin
@@ -36,7 +38,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        toolbar.setStatusBarHeigh()
         toolbar.title = "Bitso® Ticker"
         setSupportActionBar(toolbar)
 
@@ -65,6 +66,18 @@ class MainActivity : BaseActivity() {
         }
         timer?.schedule(doAsyncTask, 0, 5000)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_profile -> println("ahjsdkf")
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {

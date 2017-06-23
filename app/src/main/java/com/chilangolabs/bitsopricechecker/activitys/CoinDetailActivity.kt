@@ -68,8 +68,8 @@ class CoinDetailActivity : BaseActivity() {
                 it.coin?.toUpperCase().equals(coin.toUpperCase()) && it.currency?.toUpperCase().equals(currency.toUpperCase())
             }?.map {
                 txtCoinValue.text = it.value
-                txtCoinMin.text = it.ask
-                txtCoinMax.text = it.bid
+                txtCoinMin.text = "Ask\n${it.ask}"
+                txtCoinMax.text = "Bid\n${it.bid}"
             }
         })
     }
