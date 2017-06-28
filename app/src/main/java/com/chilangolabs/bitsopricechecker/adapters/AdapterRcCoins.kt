@@ -25,12 +25,8 @@ class AdapterRcCoins(val data: ArrayList<ItemCoin>?) : RecyclerView.Adapter<Adap
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         data?.get(position)?.let {
-            holder?.itemView?.cardContainer?.setBackgroundResource(it.bg ?: R.drawable.bg_pink_round_corners)
-            holder?.itemView?.txtItemCryptoName?.text = it.coin
-            holder?.itemView?.txtItemMin?.text = it.min
-            holder?.itemView?.txtItemMax?.text = it.max
-            holder?.itemView?.txtItemCurrency?.text = it.currency
-            holder?.itemView?.txtItemPrice?.text = it.value
+
+            holder?.bindView(it)
 
             holder?.itemView?.setOnClickListener {
                 val context = holder.itemView?.context
@@ -65,6 +61,17 @@ class AdapterRcCoins(val data: ArrayList<ItemCoin>?) : RecyclerView.Adapter<Adap
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bindView(itemcoin: ItemCoin?) {
+            itemcoin?.let {
+                itemView?.cardContainer?.setBackgroundResource(it.bg ?: R.drawable.bg_pink_round_corners)
+                itemView?.txtItemCryptoName?.text = it.coin
+                itemView?.txtItemMin?.text = it.min
+                itemView?.txtItemMax?.text = it.max
+                itemView?.txtItemCurrency?.text = it.currency
+                itemView?.txtItemPrice?.text = it.value
+            }
+        }
+    }
 
 }

@@ -1,12 +1,13 @@
 package com.chilangolabs.bitsopricechecker.adapters
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.chilangolabs.bitsopricechecker.R
 import com.chilangolabs.bitsopricechecker.models.ItemLastTrades
-import com.gorrotowi.simplerobototextview.RobotoTextView
+import kotlinx.android.synthetic.main.item_last_trades.view.*
 
 /**
  * @author Gorro
@@ -18,23 +19,24 @@ class AdapterLastTrades(val data: ArrayList<ItemLastTrades>?) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         data?.get(position).let {
-            holder?.txtPrice?.text = it?.price
-            holder?.txtAmount?.text = it?.amount
-            holder?.txtType?.text = it?.type
-
-            when (it?.type) {
-                "buy" -> print("buy")
-                "sell" -> print("sell")
-            }
+            holder?.bindView(it)
         }
     }
 
     override fun getItemCount() = data?.size ?: 0
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtPrice = itemView.findViewById(R.id.txtItemLastTradePrice) as RobotoTextView
-        val txtAmount = itemView.findViewById(R.id.txtItemLastTradeAmount) as RobotoTextView
-        val txtType = itemView.findViewById(R.id.txtItemLastTradeType) as RobotoTextView
+        fun bindView(itemLastTrade: ItemLastTrades?) {
+            itemView?.txtItemLastTradeAmount?.text = itemLastTrade?.amount
+            itemView?.txtItemLastTradePrice?.text = itemLastTrade?.price
+            itemView?.txtItemLastTradeType?.text = itemLastTrade?.type
+
+            when (itemLastTrade?.type) {
+                "buy" -> itemView?.txtItemLastTradeType?.setTextColor(Color.parseColor("#c62b5c"))
+                "sell" -> itemView?.txtItemLastTradeType?.setTextColor(Color.parseColor("#3ed13e"))
+                else -> print("no color")
+            }
+        }
     }
 }
 
