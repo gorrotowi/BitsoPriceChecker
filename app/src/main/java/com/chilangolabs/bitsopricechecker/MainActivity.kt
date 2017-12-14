@@ -2,16 +2,24 @@ package com.chilangolabs.bitsopricechecker
 
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.chilangolabs.bitsopricechecker.activitys.AddCredentialsActivity
+import com.chilangolabs.bitsopricechecker.activitys.ProfileActivity
 import com.chilangolabs.bitsopricechecker.adapters.AdapterRcCoins
 import com.chilangolabs.bitsopricechecker.models.ItemCoin
 import com.chilangolabs.bitsopricechecker.models.SingletonResponseCoins
 import com.chilangolabs.bitsopricechecker.network.Api
+import com.chilangolabs.bitsopricechecker.utils.LocalStorage
+import com.chilangolabs.bitsopricechecker.utils.openUrl
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.crash.FirebaseCrash
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import java.util.*
 
 /**
@@ -31,8 +39,14 @@ class MainActivity : BaseActivity() {
             R.drawable.bg_red_round_corners,
             R.drawable.bg_yellow_round_corners,
             R.drawable.bg_gray_round_corners,
-            R.drawable.bg_blue_round_corners)
+            R.drawable.bg_blue_round_corners,
+            R.drawable.bg_pink_round_corners,
+            R.drawable.bg_red_round_corners)
     var adapter = AdapterRcCoins(arrayListOf<ItemCoin>())
+
+    val firebaseAnanalytics by lazy {
+        FirebaseAnalytics.getInstance(this@MainActivity)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +56,20 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
 
         api.init()
+        LocalStorage.initPreferences(applicationContext)
 
-        rcCoins.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) as RecyclerView.LayoutManager
+
+        rcCoins.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rcCoins.setHasFixedSize(true)
         rcCoins.adapter = adapter
 
         swRefreshLayoutCoins.setOnRefreshListener {
             swRefreshLayoutCoins.isRefreshing = true
+            val bundle = Bundle()
+            bundle.putString(FirebaseAnalytics.Param.LOCATION, "ListCurrencys")
+            firebaseAnanalytics.let {
+                it?.logEvent(FirebaseAnalytics.Event.SEARCH, bundle)
+            }
             getTickerData()
         }
 
@@ -75,7 +96,12 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.action_profile -> println("ahjsdkf")
+            R.id.action_profile -> {
+                when (LocalStorage.getKey()) {
+                    "" -> showRegisterAlert()
+                    else -> startActivity<ProfileActivity>()
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -91,6 +117,24 @@ class MainActivity : BaseActivity() {
             it.cancel()
             it.purge()
         }
+        rcCoins.adapter = null
+    }
+
+    private fun showRegisterAlert() {
+        AlertDialog.Builder(this)
+                .setTitle("Ingresa")
+                .setMessage("Si ya tienes una cuenta en Bitso® puedes iniciar sesión, de lo contrario puedes registrarte")
+                .setPositiveButton("Registrarme", { dialog, _ ->
+                    dialog.dismiss()
+                    openUrl(this, "https://bitso.com/?ref=4x4ibsnkhxn0vzs0hmboxiev")
+                })
+                .setNeutralButton("Iniciar Sesión", { dialog, _ ->
+                    startActivity<AddCredentialsActivity>()
+                    dialog.dismiss()
+                })
+                .create()
+                .show()
+
     }
 
     private fun getTickerData() {
@@ -119,7 +163,10 @@ class MainActivity : BaseActivity() {
         }, fail = {
             swRefreshLayoutCoins.isRefreshing = false
             progressBarCoins.visibility = View.GONE
-            if (adapter.itemCount <= 0 || dataCoins.isEmpty()) {
+            FirebaseCrash.logcat(Log.WARN, "DATA", "No Data")
+            FirebaseCrash.log("The adapter have ${adapter.itemCount} and the localData have ${dataCoins.size}")
+            FirebaseCrash.report(it)
+            if (adapter.itemCount <= 0 && dataCoins.isEmpty()) {
                 txtErrorNoData.visibility = View.GONE
             } else {
                 txtErrorNoData.visibility = View.VISIBLE

@@ -1,8 +1,12 @@
 package com.chilangolabs.bitsopricechecker.utils
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 /**
  * Created by Gorro on 08/05/17.
@@ -23,4 +27,9 @@ fun String.getDateFCheck(): String? {
     val dateFormat: DateFormat = SimpleDateFormat(DATE_FORMATCheck, Locale.ENGLISH)
     val dateFormatFinal: DateFormat = SimpleDateFormat(DATE_FORMAT_FINALCheck, Locale.ENGLISH)
     return dateFormatFinal.format(dateFormat.parse(this))
+}
+
+fun openUrl(context: Context, url: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    context.startActivity(intent)
 }

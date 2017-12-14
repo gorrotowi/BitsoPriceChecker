@@ -24,4 +24,5 @@
     <string name="reload_chart">Touch to reload the chart</string>
     <string name="ask_price">askprice</string>
     <string name="bid_price">bidprice</string>
+    <string name="apppreferences">com.chilangolabs.bitsopriceticker.preferences</string>
 </resources>
