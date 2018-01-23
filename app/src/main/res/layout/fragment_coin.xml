@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp">
 
-                <com.gorrotowi.simplerobototextview.RobotoTextView
+                <TextView
                     android:id="@+id/txtCoinCurrencyCrypto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,10 +44,9 @@
                     android:text="BTC"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
-                    android:transitionName="@string/coin_transition_name"
-                    app:font="condensedBold" />
+                    android:transitionName="@string/coin_transition_name" />
 
-                <com.gorrotowi.simplerobototextview.RobotoTextView
+                <TextView
                     android:id="@+id/txtCoinCurrency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,10 +56,9 @@
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
                     android:transitionName="@string/currency_transition_name"
-                    app:font="light"
                     tools:text="MXN" />
 
-                <com.gorrotowi.simplerobototextview.RobotoTextView
+                <TextView
                     android:id="@+id/txtCoinValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,8 +68,7 @@
                     android:text="42000"
                     android:textColor="@android:color/white"
                     android:textSize="52sp"
-                    android:transitionName="@string/price_transition_name"
-                    app:font="condensedBold" />
+                    android:transitionName="@string/price_transition_name" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -82,7 +79,7 @@
                     android:layout_marginStart="16dp"
                     android:orientation="horizontal">
 
-                    <com.gorrotowi.simplerobototextview.RobotoTextView
+                    <TextView
                         android:id="@+id/txtCoinMin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -90,10 +87,9 @@
                         android:gravity="center"
                         android:text="$4200"
                         android:textColor="@android:color/white"
-                        android:textSize="18sp"
-                        app:font="regular" />
+                        android:textSize="18sp" />
 
-                    <com.gorrotowi.simplerobototextview.RobotoTextView
+                    <TextView
                         android:id="@+id/txtCoinMax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,8 +97,7 @@
                         android:gravity="center"
                         android:text="$4400"
                         android:textColor="@android:color/white"
-                        android:textSize="18sp"
-                        app:font="medium" />
+                        android:textSize="18sp"/>
 
                 </LinearLayout>
 

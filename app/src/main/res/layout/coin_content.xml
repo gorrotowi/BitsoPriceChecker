@@ -26,20 +26,18 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <com.gorrotowi.simplerobototextview.RobotoTextView
+                <TextView
                     android:id="@+id/txtCoinChartValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    app:font="condensedBold"
                     tools:text="$42123" />
 
-                <com.gorrotowi.simplerobototextview.RobotoTextView
+                <TextView
                     android:id="@+id/txtCoinChartValueDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    app:font="condensedLight"
                     tools:text="0-0-0" />
 
                 <com.chilangolabs.bitsopricechecker.views.CustomSparkView
@@ -56,31 +54,28 @@
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
-                    <com.gorrotowi.simplerobototextview.RobotoTextView
+                    <TextView
                         android:id="@+id/txtCoinOldDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="start"
-                        app:font="light"
                         tools:text="24 jun 17" />
 
-                    <com.gorrotowi.simplerobototextview.RobotoTextView
+                    <TextView
                         android:id="@+id/txtCoinMiddleDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
-                        app:font="light"
                         tools:text="24 jun 17" />
 
-                    <com.gorrotowi.simplerobototextview.RobotoTextView
+                    <TextView
                         android:id="@+id/txtCoinLastDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="end"
-                        app:font="light"
                         tools:text="24 jun 17" />
 
                 </LinearLayout>
@@ -97,14 +92,13 @@
                 android:minHeight="120dp"
                 android:minWidth="120dp" />
 
-            <com.gorrotowi.simplerobototextview.RobotoTextView
+            <TextView
                 android:id="@+id/txtProgressBarCoinChart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/loading_message"
-                app:font="condensedLight" />
+                android:text="@string/loading_message" />
 
         </RelativeLayout>
 
@@ -122,13 +116,12 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.gorrotowi.simplerobototextview.RobotoTextView
+            <TextView
                 android:id="@+id/txtCoinLastTradeBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Recent Trades"
-                app:font="condensedRegular" />
+                android:text="Recent Trades" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcLastTrades"
